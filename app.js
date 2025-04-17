@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 const PORT = process.env.PORT || 5001;
 
-const db = await mysql.createConnection({
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
@@ -20,7 +20,9 @@ const db = await mysql.createConnection({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-})
+});
+
+
 console.log("Connected to MySQL database");
 console.log("Connecting to DB:", process.env.DB_HOST);
 
